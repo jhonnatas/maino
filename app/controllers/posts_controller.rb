@@ -3,7 +3,6 @@ class PostsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_post, only: %i[show edit update destroy]
 
-
   def index
     #@posts = Post.all.order('created_at')#.page params[:page]
     @posts = Post.where(user_id: current_user)
@@ -45,8 +44,7 @@ class PostsController < ApplicationController
     end
   end
 
-  def destroy
-    
+  def destroy    
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, success: 'Post foi deletado com sucesso.' }
