@@ -5,7 +5,7 @@ class PostsController < ApplicationController
 
   def index
     #@posts = Post.all.order('created_at')#.page params[:page]
-    @posts = Post.where(user_id: current_user)
+    @posts = Post.order('created_at').where(user_id: current_user).page params[:page]
   end
   
   def show
