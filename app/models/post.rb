@@ -1,6 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
 
+  scope :by_recently_created, -> { order(created_at: :desc) }
+
   paginates_per 3
 
   validates :title, presence: true, length: { minimum: 10, maximum: 200 }
