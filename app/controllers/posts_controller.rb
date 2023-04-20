@@ -3,11 +3,11 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    #@posts = Post.all.order('created_at')#.page params[:page]
-    @posts = Post.order('created_at').where(user_id: current_user).page params[:page]
+    @posts = Post.by_recently_created.where(user_id: current_user).page params[:page]
   end
   
   def show
+    @comments = @post.comments.order(created_at: :desc)
   end
  
   def new
@@ -22,7 +22,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to posts_path, success: 'Post foi criado com sucesso.' }
+        format.html { redirect_to post_path(@post), success: 'Post foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to posts_path, success: 'Post foi atualizado com sucesso.' }
+        format.html { redirect_to post_path(@post), success: 'Post foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit, status: :unprocessable_entity }
