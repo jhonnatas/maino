@@ -1,3 +1,4 @@
-<h4><%= @post.title %> </h4>
-
-<p><%= @post.description %>
+<div class="container">
+  <%= render @post %>
+  <%= render 'comments/form', post: @post>
+</div>
