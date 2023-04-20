@@ -7,16 +7,20 @@
   <th>Title</th>
   <th>Description</th>
   <th>Date</th>
+  <th>Author</th>
  </tr>
- <% if @posts %>
-    <% @posts.each do |post| %>
+ <% if @posts.any? %>
+   <% @posts.each do |post| %>
     <tr>
       <td><%= post.title %></td>
       <td><%= post.description %></td>
-      <td><%= post.created_at.strftime("%d/%m/%Y") %></td>
+      <td><%= post.created_at.strftime("%d/%m/%Y %I:%M:%S") %></td>
+      <td><%= post.user.email %></td>
     </tr>
-    <% end %>
+   <% end %>
  <% else %>
     <p>Você ainda não criou nenhum post.</p>
  <% end %>
 </table>
+
+<%= build_pagination @posts %>  <!-- helper created -->
