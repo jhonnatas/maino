@@ -1,6 +1,7 @@
 class PostsController < ApplicationController  
   before_action :authenticate_user!
   before_action :set_post, only: %i[show edit update destroy]
+  skip_before_action :authenticate_user!, only: [:index, :show], raise: false
 
   def index
     @posts = Post.by_recently_created.where(user_id: current_user).page params[:page]

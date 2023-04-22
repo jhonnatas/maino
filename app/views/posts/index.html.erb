@@ -3,12 +3,14 @@
  <tr>
   <th>Title</th>
   <th>Description</th>
+  <th>Autor</th>
  </tr>
  <% if @posts.any? %> 
   <% @posts.each do |post| %>
     <tr>
       <td><%= post.title %></td>
       <td><%= post.description %></td>
+      <td><%= post.user.email %></td>
       <td><%= post.created_at %></td>
       <% if user_signed_in? %>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>

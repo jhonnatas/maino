@@ -12,10 +12,11 @@
  <% if @posts.any? %>
    <% @posts.each do |post| %>
     <tr>
-      <td><%= post.title %></td>
+      <td><%= link_to post.title, post_path(post) %></td>
       <td><%= post.description %></td>
       <td><%= post.created_at.strftime("%d/%m/%Y %I:%M:%S") %></td>
       <td><%= post.user.email %></td>
+
     </tr>
    <% end %>
  <% else %>

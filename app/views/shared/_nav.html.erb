@@ -7,17 +7,18 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Início</a>
+         <%= link_to 'Home', root_path, class: 'nav-link active'  %>
         </li>
-          
         <% if !user_signed_in? %>
           <li class="nav-item">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           </li> 
-        <% end %>    
-        <li class="nav-item">
-         <%= link_to 'Como utilizar', '#',  {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#exampleModal', class: 'nav-link'}  %>
-        </li>  
+        <% end %>
+        <% if user_signed_in? %>    
+          <li class="nav-item">
+          <%= link_to 'Meus Posts', posts_path, class: 'nav-link'  %>
+          </li>
+        <% end %>  
         <li class="nav-item">
          <%= link_to 'Sobre', '#',  {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#modalSobre', class: 'nav-link'}  %>
         </li> 
