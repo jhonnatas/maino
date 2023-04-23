@@ -19,6 +19,11 @@
     </div>  
 
     <div class="col-lg-5 mb-3">
+      <%= f.label :tag, { class: "form-label"} %>
+      <%= f.text_field :tags, value: @post.tags.map(&:name).join(",") %>
+    </div> 
+
+    <div class="col-lg-5 mb-3">
       <%= f.submit "Enviar", class: "btn btn-secondary" %>  <%= link_to 'Cancelar', posts_path, class: 'btn btn-danger' %>  
     </div>           
   </div>

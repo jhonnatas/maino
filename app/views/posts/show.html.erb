@@ -1,6 +1,8 @@
 <div class="container">
   <%= render @post %>
   <%= render 'comments/form', post: @post, comment: @post.comments.build %>
+  <%= render 'tags'%>
+  
   <% @comments.each do |comment| %>
     <%= render 'comments/comment', post: @post, comment: comment %>
   <% end %>

@@ -1,0 +1,26 @@
+<h1>Tags</h1><table>
+<%= link_to 'Cadastrar nova tag', new_tag_path %>
+ <tr>
+  <th>Nome</th>
+ </tr>
+ <% if @tags.any? %> 
+  <% @tags.each do |tag| %>
+    <tr>
+      <td><%= tag.name %></td>
+      <td><%= tag.created_at %></td>
+      <% if user_signed_in? %>
+        <td><%= link_to 'Edit', edit_tag_path(tag) %></td>
+        <td><%= link_to 'Show', tag_path(tag) %></td>
+        <td><%= link_to "Destroy", tag_path(tag), data: {
+                      turbo_method: :delete,
+                      turbo_confirm: "Are you sure?"
+                    } %></td>
+      <% end %>  
+    </tr>
+  <% end %>
+ <% else %> 
+  <p>Desculpe, ainda não há tags criadas!<p>
+ <% end %>
+
+</table>
+

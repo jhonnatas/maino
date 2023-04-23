@@ -1,0 +1,6 @@
+<strong>Tags: </strong>
+<% @post.tags.each do |tag| %>
+ <%= link_to tag, style: 'text-decoration:none' do %>
+  <span class="tag btn btn-success"><%= tag.name.capitalize %></span>
+ <% end %>
+<% end %>

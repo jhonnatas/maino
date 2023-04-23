@@ -19,7 +19,9 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(post_params.except(:tags))
+
+    create_or_delete_posts_tags(@post, params[:post][:tags],)
 
     respond_to do |format|
       if @post.save
@@ -33,8 +35,10 @@ class PostsController < ApplicationController
   end
 
   def update
+    create_or_delete_posts_tags(@posts, params[:post][:tags],)
+
     respond_to do |format|
-      if @post.update(post_params)
+      if @post.update(post_params.except(:tags))
         format.html { redirect_to post_path(@post), success: 'Post foi atualizado com sucesso.' }
         format.json { render :show, status: :ok, location: @post }
       else
@@ -53,14 +57,21 @@ class PostsController < ApplicationController
   end
   
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end   
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params['post']['user_id'] = current_user.id
-      params.require(:post).permit(:title, :description, :user_id)
+  def create_or_delete_posts_tags(post, tags)
+    post.taggables.destroy_all
+    tags = tags.strip.split(",")
+    tags.each do |tag|
+      post.tags << Tag.find_or_create_by(name: tag)
     end
+  end
+  
+  def set_post
+    @post = Post.find(params[:id])
+  end
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params['post']['user_id'] = current_user.id
+    params.require(:post).permit(:title, :description, :tags, :user_id)
+  end
 end
