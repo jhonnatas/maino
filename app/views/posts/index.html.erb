@@ -1,3 +1,17 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Posts</h5>
+    <p class="card-text">
+      <% if flash[:notice].present? %>
+      <div class="alert alert-warning" role="alert">
+        <%= flash[:notice] %>
+      </div>
+    <% end %>
+    </p>
+    <%= render 'import_form' %>
+  </div>
+</div>  
+
 <h1>Todos os meus posts</h1><table>
 <%= link_to 'Cadastrar novo post', new_post_path %>
  <tr>
@@ -29,3 +43,6 @@
 </table>
 
 <%= build_pagination @posts %> <!-- helper created -->
+
+  </div>
+</div>

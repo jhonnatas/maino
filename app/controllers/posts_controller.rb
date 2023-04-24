@@ -55,6 +55,16 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def import_txt
+    @response = ImportTxt.call(params[:arquivo], current_user)
+
+    unless @response
+      redirect_to posts_url, warning: 'Extensão inválida'
+    else 
+      redirect_to posts_url, success: 'Dados importados com sucesso!'
+    end
+  end
   
   private
 
