@@ -1,18 +1,20 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
- 
+  # This is necessary if you use Devise
+  authenticate :user do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   get 'home/index'
   devise_for :users
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
   root 'home#index'
 
   resources :posts do
     collection do
       post :import_txt
     end
-     resources :comments   
+      resources :comments   
   end
-
   resources :tags
 end

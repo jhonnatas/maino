@@ -1,8 +1,10 @@
 <div class="container">
   <%= render @post %>
+  <%= image_tag(@post.image, width: 300) if @post.image.attached? %>
+  <h4>Escreva um comentário</h4>
   <%= render 'comments/form', post: @post, comment: @post.comments.build %>
   <%= render 'tags'%>
-  
+  <h4>Comentários deste post: </h4>
   <% @comments.each do |comment| %>
     <%= render 'comments/comment', post: @post, comment: comment %>
   <% end %>

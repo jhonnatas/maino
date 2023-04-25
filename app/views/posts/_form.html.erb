@@ -16,7 +16,12 @@
     <div class="col-lg-5 mb-3">
       <%= f.label :Descrição, { class: "form-label"} %>
       <%= f.text_area :description, { class: "form-control" } %>
-    </div>  
+    </div>
+
+     <div class="col-lg-5 mb-3">
+      <%= f.label :Imagem, { class: "form-label"} %>
+      <%= f.file_field :image, { class: "form-control" } %>
+    </div>    
 
     <div class="col-lg-5 mb-3">
       <%= f.label :tag, { class: "form-label"} %>
