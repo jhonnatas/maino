@@ -1,19 +1,19 @@
 <h1>Home</h1>
 <%= render 'welcome' %>
 
-<h1>Listing all Posts</h1><table>
+<h4>Todos os posts</h4><table>
  <tr>
-  <th>Title</th>
-  <th>Description</th>
-  <th>Date</th>
-  <th>Author</th>
+  <th><%= t("activerecord.attributes.post.title") %></th>
+  <th><%= t("activerecord.attributes.post.body") %></th>
+  <th><%= t("activerecord.attributes.post.date") %></th>
+  <th><%= t("activerecord.attributes.post.author") %></th>
  </tr>
  <% if @posts.any? %>
    <% @posts.each do |post| %>
     <tr>
-      <td><%= link_to post.title, post_path(post) %></td>
-      <td><%= post.description %></td>
-      <td><%= post.created_at.strftime("%d/%m/%Y %I:%M:%S") %></td>
+      <td><%= link_to post.title.truncate(30), post_path(post) %></td>
+      <td><%= post.description.truncate(100) %></td>
+      <td><%= l post.created_at, format: :long %></td>
       <td><%= post.user.email %></td>
     </tr>
    <% end %>

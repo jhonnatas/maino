@@ -65,12 +65,11 @@ class PostsController < ApplicationController
      # redirect_to posts_url, success: 'Dados importados com sucesso!'
     #end
     
-    haha = salve_on_disc(params[:arquivo])
-    puts "testando esse: #{haha}"
+    saved_file = salve_on_disc(params[:arquivo])
     
-    hehe = ImportJob.perform_async(haha, current_user)
+    import_try = ImportJob.perform_async(saved_file, current_user)
 
-    unless hehe
+    unless import_try
       redirect_to posts_url, warning: 'Extensão inválida'
     else 
      redirect_to posts_url, success: 'Dados importados com sucesso!'
