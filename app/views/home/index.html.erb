@@ -1,5 +1,4 @@
 <h1>Home</h1>
-<%= Rails.application .credentials.dig(:secret_key_base)%>
 <%= render 'welcome' %>
 
 <h1>Listing all Posts</h1><table>
@@ -16,7 +15,6 @@
       <td><%= post.description %></td>
       <td><%= post.created_at.strftime("%d/%m/%Y %I:%M:%S") %></td>
       <td><%= post.user.email %></td>
-
     </tr>
    <% end %>
  <% else %>
