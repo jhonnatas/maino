@@ -1,6 +1,7 @@
-<div class="card">
+
+<div class="card mt-3">
   <div class="card-body">
-    <h5 class="card-title">Posts</h5>
+    <h3 class="card-title">Posts</h3>
     <p class="card-text">
       <% if flash[:notice].present? %>
       <div class="alert alert-warning" role="alert">
@@ -12,26 +13,28 @@
   </div>
 </div>  
 
-<h1>Todos os meus posts</h1><table>
-<%= link_to 'Cadastrar novo post', new_post_path %>
- <tr>
-  <th>Title</th>
-  <th>Description</th>
-  <th>Autor</th>
- </tr>
+<table class="table table-striped">
+  <thead>
+    <th><%= t("activerecord.attributes.post.title") %></th>
+    <th><%= t("activerecord.attributes.post.body") %></th>
+    <th><%= t("activerecord.attributes.post.date") %></th>
+    <th><%= t("activerecord.attributes.post.author") %></th>
+    <th></th>
+  </thead>
  <% if @posts.any? %> 
   <% @posts.each do |post| %>
     <tr>
       <td><%= post.title %></td>
       <td><%= post.description %></td>
       <td><%= post.user.email %></td>
-      <td><%= post.created_at %></td>
+      <td><%= l post.created_at, format: :long %></td>
+      <td></td>
       <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Show', post_path(post) %></td>
-        <td><%= link_to "Destroy", post_path(post), data: {
+        <td><%= link_to 'Edit', edit_post_path(post), class: 'btn btn-success' %></td>
+        <td><%= link_to 'Show', post_path(post), class: 'btn btn-secondary' %></td>
+        <td><%= link_to "Destroy", post_path(post),  class: 'btn btn-danger', data: {
                       turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"
+                      turbo_confirm: "Are you sure?"                     
                     } %></td>
       <% end %>  
     </tr>

@@ -1,3 +1,21 @@
-<h4><%= @post.title %> </h4>
 
-<p><%= @post.description %>
+<div class="card text-center">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= @post.title %></h5>
+  </div>
+  <div class="card-footer text-muted">
+    Escrito por: <%= @post.user.email %> - Em <%= l @post.created_at, format: :long %> 
+  </div>
+</div>
+
+<div class="card mt-3 p-2">
+  <div class="d-flex justify-content-center flex-nowrap">
+    <%= image_tag(@post.image, width: 300) if @post.image.attached? %>
+  </div>
+ <div class="mt-3">
+  <%= @post.description %>
+ </div>
+</div>
