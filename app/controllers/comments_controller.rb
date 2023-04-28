@@ -13,10 +13,10 @@ class CommentsController < ApplicationController
     
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to post_path(@post), success: 'Comentário foi criado com sucesso.' }
+        format.html { redirect_to posts_path, success: 'Comentário foi criado com sucesso.' }
         format.json { render :show, status: :created, location: @post }
       else
-        format.html { redirect_to post_path(@post), success: 'Comentário não foi criado.' }
+        format.html { redirect_to posts_path, success: 'Comentário não foi criado.' }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end

@@ -24,6 +24,7 @@
   </thead>
  <% if @posts.any? %> 
   <% @posts.each do |post| %>
+  <%= render 'ppost', post: post %>
     <tr>
       <td><%= post.title.truncate(30) %></td>
       <td><%= post.description.truncate(1000) %></td>

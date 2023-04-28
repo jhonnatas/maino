@@ -1,0 +1,54 @@
+<div class="card text-center">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= post.title %></h5>
+  </div>
+  <div class="card-footer text-muted">
+    Escrito por: <%= post.user.email %> - Em <%= l post.created_at, format: :long %> 
+  </div>
+</div>
+
+<div class="card mt-3 p-2">
+  <div class="d-flex justify-content-center flex-nowrap">
+    <%= image_tag(post.image, width: 300) if post.image.attached? %>
+  </div>
+ <div class="mt-3">
+    <%= post.content %>
+ </div>
+
+ <div class="mt-3">
+    <%= render 'comments/form', post: post, comment: post.comments.build %>
+    <%= render 'tags', post: post %>
+  </div>
+  
+  <div class="mt-3">
+    <% @comments = post.comments.order(created_at: :desc) %>  <!-- this should be in Posts controller -->
+
+    <h5>Comentários deste post: <%= @comments.size %></h5>
+    <% if @comments.any? %>
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            Clique para ver os comentários.            
+          </button>
+        </h2>
+        <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+          <div class="accordion-body">
+
+            <% @comments.each do |comment| %>
+  
+            <%= render 'comments/comment', post: post, comment: comment %>
+            <% end %>
+          </div>
+        </div>
+      </div>          
+    </div>
+    <% else %>      
+    Nenhum comentário encontrado.
+    <% end %>
+  </div>
+
+</div>

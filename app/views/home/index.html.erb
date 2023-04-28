@@ -22,14 +22,7 @@
   </thead>
  <% if @posts.any? %>
    <% @posts.each do |post| %>
-    <tr>
-      <td><%= link_to post.title.truncate(30), post_path(post) %></td>
-      <td><%= post.description.truncate(100) %></td>
-      <td><%= l post.created_at, format: :long %></td>
-      <td class="text-align-right">
-        <span class="badge bg-secondary"><%= post.user.email %></span>    
-      </td>
-    </tr>
+    <%= render 'posts/post', post: post %>
    <% end %>
  <% else %>
     <p>Você ainda não criou nenhum post.</p>
