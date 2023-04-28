@@ -14,8 +14,7 @@ class PostsController < ApplicationController
     @post = Post.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @post = Post.new(post_params.except(:tags))
@@ -102,6 +101,6 @@ class PostsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def post_params
     params['post']['user_id'] = current_user.id
-    params.require(:post).permit(:title, :description, :tags, :image, :user_id)
+    params.require(:post).permit(:title, :description, :tags, :image, :content, :user_id)
   end
 end

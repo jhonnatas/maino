@@ -5,14 +5,15 @@ pt-BR:
       comment: Comentário
       post: Postagem
       user: Usuário
-      tag: Tag
+      tag: Tag      
     attributes:
-      comment:       
+      comment:   
+        body: Descrição    
       post:
         title: Título
-        body: Descrição
         date: Data de criação
         author: Autor
+        content: Conteúdo
       user:
         email: "E-mail"
         password: "Senha"

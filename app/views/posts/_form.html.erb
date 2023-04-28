@@ -11,17 +11,17 @@
     <div class="col-lg-5 mb-3">
       <%= f.label :title, { class: "form-label"} %>
       <%= f.text_field :title, { class: "form-control" } %>
-    </div> 
+    </div>     
 
-    <div class="col-lg-5 mb-3">
-      <%= f.label :Descrição, { class: "form-label"} %>
-      <%= f.text_area :description, { class: "form-control" } %>
+    <div class="field">
+      <%= f.label :content %>
+      <%= f.rich_text_area :content %>
     </div>
 
-     <div class="col-lg-5 mb-3">
+    <div class="col-lg-5 mb-3">
       <%= f.label :Imagem, { class: "form-label"} %>
       <%= f.file_field :image, { class: "form-control" } %>
-    </div>    
+    </div> 
 
     <div class="col-lg-5 mb-3">
       <%= f.label :tag, { class: "form-label"} %>
