@@ -1,5 +1,4 @@
-class PostsController < ApplicationController  
-  before_action :authenticate_user!
+class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
   skip_before_action :authenticate_user!, only: [:index, :show], raise: false
 
@@ -21,7 +20,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params.except(:tags))
 
-    create_or_delete_posts_tags(@post, params[:post][:tags],)
+    create_or_delete_posts_tags(@post, params[:post][:tags])
 
     respond_to do |format|
       if @post.save
@@ -35,7 +34,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    create_or_delete_posts_tags(@posts, params[:post][:tags],)
+    create_or_delete_posts_tags(@posts, params[:post][:tags])
 
     respond_to do |format|
       if @post.update(post_params.except(:tags))
@@ -86,7 +85,6 @@ class PostsController < ApplicationController
       f.write(file.read)
       f.close
     end
-
     file_name
   end
 

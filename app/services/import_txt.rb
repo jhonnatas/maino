@@ -29,7 +29,7 @@ class ImportTxt < ApplicationService
   def salve_on_db file
     response = false
 
-    open("#{Rails.root}/public/#{file.to_s}") do |file|
+    open("#{Rails.root}/public/#{file}") do |file|
       file.each_with_index do |line, i|
         next if i == 0
         column = line.split("<")
