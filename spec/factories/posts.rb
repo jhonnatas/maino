@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :post do
-    title {Faker::Lorem.sentence(word_count: 3)} #=> "Quaerat quam unde."
+    title {Faker::Lorem.sentence(word_count: 3)} 
     content {Faker::Lorem.paragraphs(number: 2)}
     description {Faker::Lorem.sentence(word_count: 10)}
 

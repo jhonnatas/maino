@@ -1,53 +1,56 @@
-
-<div class="card mt-3">
-  <div class="card-body">
-    <h3 class="card-title">Posts</h3>
-    <p class="card-text">
-      <% if flash[:notice].present? %>
-      <div class="alert alert-warning" role="alert">
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
-    </p>
-    <%= render 'import_form' %>    
-    <%= link_to 'Criar post', new_post_path, class: 'btn btn-success mt-3' %>    
-  </div>
-</div>  
-
-<table class="table table-striped">
-  <thead>
-    <th><%= t("activerecord.attributes.post.title") %></th>
-    <th><%= t("activerecord.attributes.post.content") %></th>
-    <th><%= t("activerecord.attributes.post.date") %></th>
-    <th><%= t("activerecord.attributes.post.author") %></th>
-    <th></th>
-  </thead>
- <% if @posts.any? %> 
-  <% @posts.each do |post| %>
-  <%= render 'ppost', post: post %>
-    <tr>
-      <td><%= post.title.truncate(30) %></td>
-      <td><%= post.description.truncate(1000) %></td>
-      <td><%= post.user.email %></td>
-      <td><%= l post.created_at, format: :long %></td>
-      <td></td>
+<div class="container">
+  <div class="card mt-3">
+    <div class="card-body">
+      <h3 class="card-title">Posts</h3>
+      <p class="card-text">
+        <% if flash[:notice].present? %>
+        <div class="alert alert-warning" role="alert">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      </p>
       <% if user_signed_in? %>
-        <td><%= link_to 'Edit', edit_post_path(post), class: 'btn btn-success' %></td>
-        <td><%= link_to 'Show', post_path(post), class: 'btn btn-secondary' %></td>
-        <td><%= link_to "Destroy", post_path(post),  class: 'btn btn-danger', data: {
-                      turbo_method: :delete,
-                      turbo_confirm: "Are you sure?"                     
-                    } %></td>
-      <% end %>  
-    </tr>
+        <%= render 'import_form' %>    
+        <%= link_to 'Criar post', new_post_path, class: 'btn btn-success mt-3' %>    
+      <% end %>
+    </div>
+  </div>  
+
+  <table class="table table-striped">
+    <thead>
+      <th><%= t("activerecord.attributes.post.title") %></th>
+      <th><%= t("activerecord.attributes.post.content") %></th>
+      <th><%= t("activerecord.attributes.post.date") %></th>
+      <th><%= t("activerecord.attributes.post.author") %></th>
+      <th></th>
+    </thead>
+  <% if @posts.any? %> 
+    <% @posts.each do |post| %>
+    <%= render 'ppost', post: post %>
+      <tr>
+        <td><%= post.title.truncate(30) %></td>
+        <td><%= post.description.truncate(1000) %></td>
+        <td><%= post.user.email %></td>
+        <td><%= l post.created_at, format: :long %></td>
+        <td></td>
+        <% if user_signed_in? %>
+          <td><%= link_to 'Edit', edit_post_path(post), class: 'btn btn-success' %></td>
+          <td><%= link_to 'Show', post_path(post), class: 'btn btn-secondary' %></td>
+          <td><%= link_to "Destroy", post_path(post),  class: 'btn btn-danger', data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "Are you sure?"                     
+                      } %></td>
+        <% end %>  
+      </tr>
+    <% end %>
+  <% else %> 
+    <p>Desculpe, ainda não há posts criados!<p>
   <% end %>
- <% else %> 
-  <p>Desculpe, ainda não há posts criados!<p>
- <% end %>
 
-</table>
+  </table>
 
-<%= build_pagination @posts %> <!-- helper created -->
+  <%= build_pagination @posts %> <!-- helper created -->
 
+    </div>
   </div>
 </div>
