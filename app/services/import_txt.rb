@@ -6,47 +6,31 @@ class ImportTxt < ApplicationService
   end
 
   def call
-    # unless self.validateExtensiopn
+    # unless self.validate_extension
     #   return false
     # end
-
-    #file_name = self.salve_on_disc
-    response = self.salve_on_db(@file)
+    salve_on_db
   end
 
-  #def salve_on_disc
-   # txt_file_path = "public/"
-   # file_name = "dados_#{Time.now.to_i}.txt"
-   # txt_file_path = File.join(Rails.root, txt_file_path, file_name)
-   # File.open(txt_file_path, "wb") do |f|
-   #   f.write(@file.read)
-   #   #f.close
-   # end
-
-   # file_name
-  #end
-
-  def salve_on_db file
+  def salve_on_db 
     response = false
 
-    open("#{Rails.root}/public/#{file}") do |file|
+    open("#{Rails.root}/public/#{@file}") do |file|
       file.each_with_index do |line, i|
         next if i == 0
-        column = line.split("<")
-        
+        column = line.split(',')
         post = Post.new
         post.title = column[0]
-        post.description = column[1]
+        post.content = column[1]
         post.user_id = @user
-        post.save        
-        response = true
+        response = true if post.save!
+        response
       end
     end
-    response
   end
 
-  def validateExtensiopn
-    allow_extensions = ['.txt']
-    true if allow_extensions.include? File.extname(@file.original_filename)
-  end
+  # def validate_extension
+  #   allow_extensions = ['.txt']
+  #   true if allow_extensions.include? File.extname(@file.original_filename)
+  # end
 end

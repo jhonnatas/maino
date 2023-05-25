@@ -1,0 +1,24 @@
+<% @comments = post.comments.order(created_at: :desc) %>  <!-- this should be in Posts controller -->
+
+  <h5>Comentários deste post: <%= @comments.size %></h5>
+  <% if @comments.any? %>
+    <div class="accordion" id="accordionPanelsStayOpenExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+          Clique para ver os comentários.            
+        </button>
+      </h2>
+      <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+        <div class="accordion-body">
+          <% @comments.each do |comment| %>
+            <%= render 'comments/comment', post: post, comment: comment %>
+          <% end %>
+        </div>
+      </div>
+    </div>          
+  </div>
+  <% else %>      
+    Nenhum comentário encontrado.
+  <% end %>
+<% end %>
