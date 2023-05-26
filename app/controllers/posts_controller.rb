@@ -58,11 +58,13 @@ class PostsController < ApplicationController
     saved_file = save_file_on_disc(params[:arquivo])
 
     import_try = ImportJob.perform_async(saved_file, current_user.id)
+
+    data = Sidekiq::Status::message import_try
  
-    if import_try
+    if data == 'complete'
       redirect_to posts_url, success: 'Dados importados com sucesso!'
     else 
-      redirect_to posts_url, success: 'Extensão inválida'
+      redirect_to posts_url, success: 'Não foi possível importar'
     end
   end
   

@@ -1,6 +1,6 @@
 <% @comments = post.comments.order(created_at: :desc) %>  <!-- this should be in Posts controller -->
-
-  <h5>Comentários deste post: <%= @comments.size %></h5>
+ <span class="input-group-text" id="addon-wrapping"><i class="fas fa-comment-dots"></i></span>
+  <h5><i class="fas fa-comment-dots"></i> Comentários deste post: <%= @comments.size %></h5>
   <% if @comments.any? %>
     <div class="accordion" id="accordionPanelsStayOpenExample">
     <div class="accordion-item">
