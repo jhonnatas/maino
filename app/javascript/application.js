@@ -4,3 +4,6 @@ import "./controllers"
 import * as bootstrap from "bootstrap"
 import "trix"
 import "@rails/actiontext"
+import Swal from 'sweetalert2';
+window.Swal = Swal;
+import "js/main"
