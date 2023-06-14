@@ -4,9 +4,7 @@
       Featured
     </div>
     <div class="card-body">
-      <h5 class="card-title"><%= post.title %>
-      <%= button_to "Destroy this post", post, method: :delete, form_class: 'delete-post' %>
-      </h5>
+      <h5 class="card-title"><%= post.title %></h5>
     </div>
     <div class="card-footer text-muted">
       Escrito por: <%= post.user.email %> - Em <%= l post.created_at, format: :long %> 
@@ -18,7 +16,7 @@
       <%= image_tag(post.image, width: 300) if post.image.attached? %>
     </div>
     <div class="mt-3">
-        <%= post.content %>
+       <%= post.content %>
     </div>
   </div>
 </div>

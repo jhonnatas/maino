@@ -33,8 +33,8 @@ class PostsController < ApplicationController
   end
 
   def update
-    create_or_delete_posts_tags(@posts, params[:post][:tags])
-
+    create_or_delete_posts_tags(@post, params[:post][:tags])
+   
     respond_to do |format|
       if @post.update(post_params.except(:tags))
         format.html { redirect_to post_path(@post), success: 'Post foi atualizado com sucesso.' }

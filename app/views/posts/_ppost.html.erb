@@ -1,11 +1,12 @@
-
 <div class="card text-center mt-3">
   <div class="card-header">Featured</div>
   <div class="card-body">
     <h5 class="card-title"><%= post.title %></h5>
   </div>
   <div class="card-footer text-muted">
+    Post número: <%= post.id %>
     Escrito por: <%= post.user.email %> - Em <%= l post.created_at, format: :long %> 
+    <%= link_to 'editar', edit_post_path(post) %>
   </div>
 </div>
 
