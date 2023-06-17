@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
+  before_action :is_author?, only: %i[edit update destroy]
   skip_before_action :authenticate_user!, only: [:index, :show], raise: false
 
   def index
@@ -87,6 +88,10 @@ class PostsController < ApplicationController
     tags.each do |tag|
       post.tags << Tag.find_or_create_by(name: tag)
     end
+  end
+
+  def is_author?
+    redirect_to root_path, success: "Você não é o dono deste post. #{current_user.id}" unless @post.user_id == current_user.id
   end
   
   def set_post
