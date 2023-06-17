@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show], raise: false
 
   def index
-    @posts = Post.by_recently_created.where(user_id: current_user).page params[:page]
+    @posts = Post.friendly.by_recently_created.where(user_id: current_user).page params[:page]
   end
   
   def show
@@ -90,7 +90,7 @@ class PostsController < ApplicationController
   end
   
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.friendly.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.

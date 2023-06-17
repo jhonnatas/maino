@@ -36,6 +36,7 @@ gem "devise"
 gem 'kaminari'
 gem 'bootstrap5-kaminari-views'
 gem 'sidekiq', '~> 6.5', '>= 6.5.6'
+gem 'friendly_id', '~> 5.1'
 
 # Use Redis adapter to run Action Cable in production
 gem "redis", "~> 4.0"

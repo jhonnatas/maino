@@ -10,6 +10,9 @@
 #  updated_at  :datetime         not null
 #
 class Post < ApplicationRecord
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   belongs_to :user
   has_many :comments, dependent: :destroy
   has_many :taggables, dependent: :destroy
@@ -24,5 +27,5 @@ class Post < ApplicationRecord
   paginates_per 3
 
   validates :title, presence: true, length: { minimum: 2, maximum: 200 }
-  validates :content, presence: true, length: { minimum: 2, maximum: 4000 }
+  validates :content, presence: true, length: { minimum: 2, maximum: 7000 }
 end
