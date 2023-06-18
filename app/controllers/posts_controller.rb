@@ -91,7 +91,7 @@ class PostsController < ApplicationController
   end
 
   def is_author?
-    redirect_to root_path, success: "Você não é o dono deste post. #{current_user.id}" unless @post.user_id == current_user.id
+    redirect_to root_path, success: 'Você não é o dono deste post.' unless @post.user_id == current_user.id
   end
   
   def set_post
